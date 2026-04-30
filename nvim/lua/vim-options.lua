@@ -19,6 +19,7 @@ vim.keymap.set('n', '<c-l>', ':wincmd l<CR>')
 
 vim.keymap.set('n', '<leader>h', ':nohlsearch<CR>')
 vim.wo.number = true
+vim.opt.relativenumber = true
 
 vim.keymap.set('n', '<leader>w', ':w<CR>', { desc = 'Save file' })
 vim.keymap.set('n', '<leader>q', ':q<CR>', { desc = 'Quit' })
