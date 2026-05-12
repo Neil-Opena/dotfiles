@@ -1,12 +1,18 @@
 return {
-  -- add catppuccin
-  { "catppuccin/nvim", lazy = true, name = "catppuccin" },
+  -- VS Code Dark+ theme
+  {
+    "Mofiqul/vscode.nvim",
+    opts = {
+      style = "dark",
+      transparent = false,
+    },
+  },
 
-  -- Configure LazyVim to load catppuccin
+  -- Configure LazyVim to load vscode
   {
     "LazyVim/LazyVim",
     opts = {
-      colorscheme = "catppuccin",
+      colorscheme = "vscode",
     },
   },
 }
