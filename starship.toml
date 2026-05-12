@@ -26,7 +26,7 @@ $time\
 [ ](fg:purple)\
 $line_break$character"""
 
-palette = 'catppuccin_mocha'
+palette = 'vscode_dark_plus'
 
 [palettes.gruvbox_dark]
 color_fg0 = '#fbf1c7'
@@ -67,6 +67,36 @@ surface0 = "#313244"
 base = "#1e1e2e"
 mantle = "#181825"
 crust = "#11111b"
+
+[palettes.vscode_dark_plus]
+# VSCode Dark+ theme colors
+text = "#d4d4d4"
+subtext1 = "#cccccc"
+subtext0 = "#b3b3b3"
+overlay2 = "#999999"
+overlay1 = "#808080"
+overlay0 = "#666666"
+surface2 = "#4d4d4d"
+surface1 = "#3c3c3c"
+surface0 = "#2d2d2d"
+base = "#1e1e1e"
+mantle = "#181818"
+crust = "#0f0f0f"
+red = "#f14c4c"
+orange = "#ce9178"
+yellow = "#f5f543"
+green = "#23d18b"
+teal = "#11a8cd"
+sky = "#29b8db"
+sapphire = "#4fc1ff"
+blue = "#3b8eea"
+lavender = "#b180d7"
+purple = "#d670d6"
+pink = "#c586c0"
+peach = "#ce9178"
+rosewater = "#f5e0dc"
+flamingo = "#f2cdcd"
+maroon = "#cd3131"
 
 [os]
 disabled = false
