@@ -1,18 +1,25 @@
 return {
-  -- VS Code Dark+ theme
+  -- Kanagawa theme
   {
-    "Mofiqul/vscode.nvim",
+    "rebelot/kanagawa.nvim",
     opts = {
-      style = "dark",
-      transparent = false,
+      colors = {
+        theme = {
+          all = {
+            ui = {
+              bg_gutter = "none",
+            },
+          },
+        },
+      },
     },
   },
 
-  -- Configure LazyVim to load vscode
+  -- Configure LazyVim to load kanagawa-wave
   {
     "LazyVim/LazyVim",
     opts = {
-      colorscheme = "vscode",
+      colorscheme = "kanagawa-wave",
     },
   },
 }
