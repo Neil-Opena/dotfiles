@@ -1,0 +1,30 @@
+# Ghostty Terminal Configuration
+
+# Theme & Display
+theme = "Kanagawa Wave"
+background-opacity = 1
+background-blur = true
+font-size = 14
+
+# Split Navigation (opt+hjkl)
+keybind = opt+h=goto_split:left
+keybind = opt+j=goto_split:bottom
+keybind = opt+k=goto_split:top
+keybind = opt+l=goto_split:right
+
+# Split Creation (opt+shift+hjkl)
+keybind = opt+shift+h=new_split:left
+keybind = opt+shift+j=new_split:down
+keybind = opt+shift+k=new_split:up
+keybind = opt+shift+l=new_split:right
+
+# Mouse & UI
+mouse-hide-while-typing = true
+macos-titlebar-proxy-icon = hidden
+title = " "
+
+# Clipboard
+clipboard-write = allow
+
+# Shader
+custom-shader = ~/.config/ghostty/shaders/cursor.glsl
