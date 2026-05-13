@@ -11,6 +11,9 @@ export NVM_DIR="$HOME/.nvm"
 export BUN_INSTALL="$HOME/.bun"
 export PATH="$BUN_INSTALL/bin:$PATH"
 
+# ghostty
+export PATH="/Applications/Ghostty.app/Contents/MacOS:$PATH"
+
 # Catppuccin theme for zsh-syntax-highlighting (must be before loading the plugin)
 source ~/.zsh/catppuccin_macchiato-zsh-syntax-highlighting.zsh
 
