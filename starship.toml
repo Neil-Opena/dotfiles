@@ -26,7 +26,7 @@ $time\
 [ ](fg:purple)\
 $line_break$character"""
 
-palette = 'kanagawa'
+palette = 'vscode_dark_plus'
 
 [palettes.gruvbox_dark]
 color_fg0 = '#fbf1c7'
@@ -69,34 +69,34 @@ mantle = "#181825"
 crust = "#11111b"
 
 [palettes.vscode_dark_plus]
-# VSCode Dark+ theme colors
-text = "#d4d4d4"
-subtext1 = "#cccccc"
-subtext0 = "#b3b3b3"
-overlay2 = "#999999"
-overlay1 = "#808080"
-overlay0 = "#666666"
-surface2 = "#4d4d4d"
-surface1 = "#3c3c3c"
-surface0 = "#2d2d2d"
-base = "#1e1e1e"
-mantle = "#181818"
-crust = "#0f0f0f"
-red = "#f14c4c"
-orange = "#ce9178"
-yellow = "#f5f543"
-green = "#23d18b"
-teal = "#11a8cd"
-sky = "#29b8db"
-sapphire = "#4fc1ff"
-blue = "#3b8eea"
-lavender = "#b180d7"
-purple = "#d670d6"
-pink = "#c586c0"
-peach = "#ce9178"
-rosewater = "#f5e0dc"
-flamingo = "#f2cdcd"
-maroon = "#cd3131"
+# VSCode Dark+ theme colors (from vscode.nvim plugin)
+text = "#D4D4D4"
+subtext1 = "#BBBBBB"
+subtext0 = "#9CDCFE"
+overlay2 = "#5A5A5A"
+overlay1 = "#51504F"
+overlay0 = "#2D2D2D"
+surface2 = "#252526"
+surface1 = "#202020"
+surface0 = "#1F1F1F"
+base = "#1F1F1F"
+mantle = "#1F1F1F"
+crust = "#1F1F1F"
+red = "#F44747"
+orange = "#CE9178"
+yellow = "#DCDCAA"
+green = "#6A9955"
+teal = "#4EC9B0"
+sky = "#9CDCFE"
+sapphire = "#569CD6"
+blue = "#569CD6"
+lavender = "#C586C0"
+purple = "#C586C0"
+pink = "#C586C0"
+peach = "#CE9178"
+rosewater = "#D4D4D4"
+flamingo = "#DCDCAA"
+maroon = "#F44747"
 
 [palettes.kanagawa]
 # Kanagawa theme colors

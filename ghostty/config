@@ -1,7 +1,45 @@
 # Ghostty Terminal Configuration
 
 # Theme & Display
-theme = "Kanagawa Wave"
+# VSCode Dark+ colors (from vscode.nvim)
+background = 1f1f1f
+foreground = d4d4d4
+cursor-color = 569cd6
+selection-background = 264f78
+selection-foreground = d4d4d4
+
+# Black
+palette = 0=#1f1f1f
+palette = 8=#5a5a5a
+
+# Red
+palette = 1=#f44747
+palette = 9=#f44747
+
+# Green
+palette = 2=#6a9955
+palette = 10=#b5cea8
+
+# Yellow
+palette = 3=#dcdcaa
+palette = 11=#dcdcaa
+
+# Blue
+palette = 4=#569cd6
+palette = 12=#9cdcfe
+
+# Magenta
+palette = 5=#c586c0
+palette = 13=#c586c0
+
+# Cyan
+palette = 6=#4ec9b0
+palette = 14=#4ec9b0
+
+# White
+palette = 7=#d4d4d4
+palette = 15=#ffffff
+
 background-opacity = 1
 background-blur = true
 font-size = 14
