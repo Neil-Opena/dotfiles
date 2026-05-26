@@ -5,6 +5,11 @@ return {
       inlay_hints = {
         enabled = false,
       },
+      servers = {
+        marksman = {
+          autostart = false,
+        },
+      },
     },
   },
   -- Disable markdownlint linting via nvim-lint
