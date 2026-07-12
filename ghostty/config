@@ -42,7 +42,7 @@ palette = 15=#ffffff
 
 background-opacity = 1
 background-blur = true
-font-family = "JetBrains Mono"
+font-family = "Hack Nerd Font"
 font-size = 14
 
 # Split Navigation (opt+hjkl)
