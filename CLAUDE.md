@@ -35,8 +35,34 @@ When modifying theme/colors in any tool, maintain VSCode Dark+ color values to p
 │   └── shaders/            # Custom GLSL shaders
 ├── .zshrc                  # Shell config (loads nvm, bun, starship)
 ├── starship.toml           # Starship prompt config with custom palettes
-└── .claude/                # Claude Code settings and hooks
+├── .claude/                # Claude Code settings and hooks (symlinked to ~/.claude/)
+│   ├── hooks/              # Event hooks (caveman mode, prompt submit)
+│   ├── settings.json       # Claude Code settings
+│   ├── settings.local.json # Local overrides
+│   ├── statusline-command.sh # Custom statusline script
+│   └── CLAUDE.md           # Global agent instructions (symlinked to ~/.claude/CLAUDE.md)
+└── CLAUDE.md               # Project-specific agent instructions for this repo
 ```
+
+## Claude Code Configuration
+
+Agent instructions managed via two CLAUDE.md files:
+
+**CLAUDE.md** (this file at repo root): Project-specific instructions for dotfiles repository. Takes precedence when working in this repo.
+
+**.claude/CLAUDE.md**: Global agent instructions applied across all projects. Contains quality standards, commit message preferences, bug fix workflows, UI/engineering excellence rules. Symlinked to `~/.claude/CLAUDE.md` for global availability.
+
+Claude Code resolution order:
+1. Project-local ./CLAUDE.md (this file)
+2. Global ~/.claude/CLAUDE.md (symlinked to ./.claude/CLAUDE.md)
+
+Other Claude Code configs symlinked from `.claude/` to `~/.claude/`:
+- hooks/ - Event-driven shell commands (caveman mode, prompt validation)
+- settings.json - Editor behavior, model preferences, feature flags
+- settings.local.json - Machine-specific overrides
+- statusline-command.sh - Custom terminal statusline
+
+All symlinks already configured. No manual setup needed.
 
 ## Development Workflows
 

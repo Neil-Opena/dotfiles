@@ -40,10 +40,10 @@ palette = 14=#4ec9b0
 palette = 7=#d4d4d4
 palette = 15=#ffffff
 
-background-opacity = 1
+background-opacity = 0.8
 background-blur = true
 font-family = "Hack Nerd Font"
-font-size = 14
+font-size = 15
 
 # Split Navigation (opt+hjkl)
 keybind = opt+h=goto_split:left
