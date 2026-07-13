@@ -8,6 +8,7 @@ Personal dotfiles repository for macOS development environment. Manages configs 
 - **Neovim** (LazyVim-based, main editor config)
 - **Tmux** (multiplexer with vim-style navigation)
 - **Ghostty** (terminal emulator)
+- **Herdr** (agent multiplexer)
 - **Shell** (Zsh with Starship prompt)
 
 ## Theme Consistency
@@ -33,6 +34,8 @@ When modifying theme/colors in any tool, maintain VSCode Dark+ color values to p
 ├── ghostty/
 │   ├── config              # Ghostty terminal config
 │   └── shaders/            # Custom GLSL shaders
+├── herdr/
+│   └── config.toml         # Herdr agent multiplexer config (symlinked to ~/.config/herdr/)
 ├── .zshrc                  # Shell config (loads nvm, bun, starship)
 ├── starship.toml           # Starship prompt config with custom palettes
 ├── .claude/                # Claude Code settings and hooks (symlinked to ~/.claude/)
@@ -106,6 +109,28 @@ Zsh with:
 - Bun runtime
 - zsh-syntax-highlighting with Catppuccin Macchiato theme
 
+### Herdr Configuration
+
+Agent multiplexer config at `herdr/config.toml` (symlinked to `~/.config/herdr/config.toml`).
+
+Default prefix: `Ctrl+b`
+
+Key patterns:
+- `prefix + ?` - Help menu
+- `prefix + s` - Settings
+- `prefix + c` - New tab
+- `prefix + v` - Vertical split
+- `prefix + -` - Horizontal split
+- `prefix + h/j/k/l` - Focus pane left/down/up/right
+- `prefix + shift+r` - Reload config
+
+Reload config without restart:
+```bash
+herdr server reload-config
+```
+
+Default config generated via `herdr --default-config`.
+
 ### Theme Development
 
 Multiple theme palettes defined in starship.toml:
@@ -135,5 +160,6 @@ When switching themes system-wide:
 This is a dotfiles repository. No compilation, linting, or test commands. Changes typically applied by:
 - Neovim: Auto-reloads on config save (hotreload.lua)
 - Tmux: `prefix + r` to source ~/.tmux.conf
+- Herdr: `herdr server reload-config` or `prefix + shift+r`
 - Shell: `source ~/.zshrc` or restart terminal
 - Ghostty: Automatically reloads config
