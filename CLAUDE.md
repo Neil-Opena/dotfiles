@@ -5,7 +5,7 @@ This file provides guidance to Claude Code (claude.ai/code) when working with co
 ## Repository Overview
 
 Personal dotfiles repository for macOS development environment. Manages configs for:
-- **Neovim** (LazyVim-based, main editor config)
+- **Neovim** (two configs: `nvim` for LazyVim full-featured setup, `nvim_simple` for lean minimal config)
 - **Tmux** (multiplexer with vim-style navigation)
 - **Ghostty** (terminal emulator)
 - **Herdr** (agent multiplexer)
@@ -14,12 +14,13 @@ Personal dotfiles repository for macOS development environment. Manages configs 
 ## Theme Consistency
 
 Entire setup uses **VSCode Dark+ theme** for visual consistency:
-- Neovim: `vscode.nvim` colorscheme
+- Neovim (nvim): `vscode.nvim` colorscheme
+- Neovim (nvim_simple): Rose Pine Moon theme
 - Tmux: Custom VSCode Dark+ colors for pane borders (#5A5A5A inactive, #569CD6 active)
 - Ghostty: VSCode Dark+ palette defined in config
 - Starship: Custom `vscode_dark_plus` palette defined in starship.toml
 
-When modifying theme/colors in any tool, maintain VSCode Dark+ color values to preserve consistency.
+When modifying theme/colors in any tool, maintain VSCode Dark+ color values to preserve consistency (nvim_simple uses Rose Pine independently).
 
 ## File Structure
 
@@ -35,11 +36,18 @@ When modifying theme/colors in any tool, maintain VSCode Dark+ color values to p
 │   │   ├── statusline-command.sh # Custom statusline script
 │   │   └── CLAUDE.md       # Global agent instructions
 │   └── .config/            # Mirrors ~/.config structure
-│       ├── nvim/           # Neovim LazyVim configuration
+│       ├── nvim/           # Neovim LazyVim configuration (full-featured)
 │       │   ├── init.lua    # Entry point
 │       │   └── lua/
 │       │       ├── config/ # Core LazyVim configs (autocmds, keymaps, options, lazy)
 │       │       └── plugins/ # Plugin customizations
+│       ├── nvim_simple/    # Neovim lean configuration (minimal setup)
+│       │   ├── init.lua    # Entry point (loads vim_config, plugin, keys)
+│       │   └── lua/
+│       │       ├── vim_config.lua # Vim settings (leader, indentation, line numbers)
+│       │       ├── keys.lua       # Custom keymaps
+│       │       ├── plugin.lua     # Lazy.nvim bootstrap
+│       │       └── plugins/       # Plugin specs (colorscheme, git, navigation, ui)
 │       ├── ghostty/
 │       │   ├── config      # Ghostty terminal config
 │       │   └── shaders/    # Custom GLSL shaders
@@ -50,7 +58,6 @@ When modifying theme/colors in any tool, maintain VSCode Dark+ color values to p
 │       ├── herdr/
 │       │   └── config.toml # Herdr agent multiplexer config
 │       └── starship.toml   # Starship prompt config with custom palettes
-├── nvim.backup/            # Backup of previous nvim config
 └── CLAUDE.md               # Project-specific agent instructions for this repo
 ```
 
@@ -75,6 +82,36 @@ Individual Claude Code config files symlinked from `home/.claude/` to `~/.claude
 
 **Why individual files instead of entire directory?** ~/.claude/ contains runtime state managed by Claude Code (history.jsonl, debug/, session-env/, file-history/, cache/). Symlinking entire directory would write runtime state into version-controlled repo. Individual file symlinks keep configs in repo while runtime state stays local.
 
+### Notification Hooks
+
+Notification hooks (permission prompts, idle state, task completion) removed since herdr UI provides visual feedback. Re-enable in settings.json if running agents in background:
+
+```json
+"hooks": {
+  "Notification": [
+    {
+      "matcher": "permission_prompt",
+      "hooks": [{
+        "type": "command",
+        "command": "osascript -e 'display notification \"Permission needed\" with title \"Claude Code\" sound name \"Tink\"'"
+      }]
+    },
+    {
+      "matcher": "idle_prompt",
+      "hooks": [{
+        "type": "command",
+        "command": "osascript -e 'display notification \"Ready for input\" with title \"Claude Code\" sound name \"Morse\"'"
+      }]
+    }
+  ],
+  "Stop": [{
+    "hooks": [{
+      "type": "command",
+      "command": "osascript -e 'display notification \"Task completed\" with title \"Claude Code\" sound name \"Glass\"'"
+    }]
+  }]
+}
+
 ## Setup Instructions
 
 Fresh Mac setup after cloning this repo:
@@ -88,7 +125,15 @@ ln -sf <path_to_dotfiles>/home/.zshrc ~/.zshrc
 
 # .config directory (create parent dirs first)
 mkdir -p ~/.config/tmux ~/.config/wezterm ~/.config/herdr
+
+# Neovim config (choose one)
+# Option 1: Full-featured LazyVim setup
 ln -sf <path_to_dotfiles>/home/.config/nvim ~/.config/nvim
+
+# Option 2: Lean minimal config
+# ln -sf <path_to_dotfiles>/home/.config/nvim_simple ~/.config/nvim
+
+# Other configs
 ln -sf <path_to_dotfiles>/home/.config/ghostty ~/.config/ghostty
 ln -sf <path_to_dotfiles>/home/.config/tmux/tmux.conf ~/.config/tmux/tmux.conf
 ln -sf <path_to_dotfiles>/home/.config/wezterm/wezterm.lua ~/.config/wezterm/wezterm.lua
@@ -115,6 +160,10 @@ ls -la ~/.claude | grep "^l"
 
 ### Neovim Configuration
 
+Two configs available:
+
+#### nvim (LazyVim - Full Featured)
+
 LazyVim-based setup. Plugin configs live in `home/.config/nvim/lua/plugins/`:
 - `colorscheme.lua` - Theme selection (vscode, kanagawa available)
 - `explorer.lua` - File explorer settings
@@ -124,6 +173,28 @@ LazyVim-based setup. Plugin configs live in `home/.config/nvim/lua/plugins/`:
 - `image.lua` - Image rendering in terminal
 
 Custom keymaps in `home/.config/nvim/lua/config/keymaps.lua`. LazyVim default keymaps: https://github.com/LazyVim/LazyVim/blob/main/lua/lazyvim/config/keymaps.lua
+
+#### nvim_simple (Lean Minimal)
+
+Minimal setup with essential plugins only. Structure:
+- `lua/vim_config.lua` - Core settings (leader=space, 2-space indent, hybrid line numbers, case-smart search)
+- `lua/keys.lua` - Custom keymaps (Esc to save, Ctrl+a select all, paste preserving clipboard)
+- `lua/plugin.lua` - Lazy.nvim bootstrap
+- `lua/plugins/` - Plugin specs:
+  - `colorscheme.lua` - Rose Pine Moon theme with transparency
+  - `git.lua` - Neogit + Gitsigns for Git integration
+  - `navigation.lua` - Oil.nvim file explorer + Snacks.nvim picker/search
+  - `ui.lua` - which-key for keybinding hints
+
+Key bindings:
+- `<leader>e` - Open Oil.nvim file explorer
+- `<leader>g` - Open Neogit
+- `<leader>f` - File picker (Snacks)
+- `<leader>s` - Text search (Snacks)
+- `<leader>b` - Buffer navigation (Snacks)
+- `gd` - Jump to LSP definition
+
+Switch between configs by changing nvim symlink target in ~/.config/nvim.
 
 ### Tmux Configuration
 

@@ -24,6 +24,9 @@ eval "$(starship init zsh)"
 eval "$(direnv hook zsh)"
 
 # Auto-start herdr (only if not already in herdr)
-if [ -z "$HERDR" ] && command -v herdr &> /dev/null; then
-    herdr
+if command -v herdr &> /dev/null; then
+    # Check parent process - if it's herdr, we're already inside
+    if ! ps -o comm= -p $PPID 2>/dev/null | grep -q herdr; then
+        herdr
+    fi
 fi
