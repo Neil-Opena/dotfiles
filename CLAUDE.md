@@ -27,8 +27,6 @@ When modifying theme/colors in any tool, maintain VSCode Dark+ color values to p
 .
 ├── home/                    # Mirrors ~ home directory structure
 │   ├── .bashrc             # Bash shell config
-│   ├── .tmux.conf          # Tmux config with vim-tmux-navigator integration
-│   ├── .wezterm.lua        # WezTerm terminal config
 │   ├── .zshrc              # Zsh shell config (loads nvm, bun, starship)
 │   ├── .claude/            # Claude Code settings and hooks (individual files symlinked to ~/.claude/)
 │   │   ├── hooks/          # Event hooks (caveman mode, prompt submit)
@@ -45,6 +43,10 @@ When modifying theme/colors in any tool, maintain VSCode Dark+ color values to p
 │       ├── ghostty/
 │       │   ├── config      # Ghostty terminal config
 │       │   └── shaders/    # Custom GLSL shaders
+│       ├── tmux/
+│       │   └── tmux.conf   # Tmux config with vim-tmux-navigator integration
+│       ├── wezterm/
+│       │   └── wezterm.lua # WezTerm terminal config
 │       ├── herdr/
 │       │   └── config.toml # Herdr agent multiplexer config
 │       └── starship.toml   # Starship prompt config with custom palettes
@@ -82,17 +84,15 @@ Fresh Mac setup after cloning this repo:
 
 # Home directory dotfiles
 ln -sf <path_to_dotfiles>/home/.bashrc ~/.bashrc
-ln -sf <path_to_dotfiles>/home/.tmux.conf ~/.tmux.conf
-ln -sf <path_to_dotfiles>/home/.wezterm.lua ~/.wezterm.lua
 ln -sf <path_to_dotfiles>/home/.zshrc ~/.zshrc
 
 # .config directory (create parent dirs first)
-mkdir -p ~/.config
+mkdir -p ~/.config/tmux ~/.config/wezterm ~/.config/herdr
 ln -sf <path_to_dotfiles>/home/.config/nvim ~/.config/nvim
 ln -sf <path_to_dotfiles>/home/.config/ghostty ~/.config/ghostty
+ln -sf <path_to_dotfiles>/home/.config/tmux/tmux.conf ~/.config/tmux/tmux.conf
+ln -sf <path_to_dotfiles>/home/.config/wezterm/wezterm.lua ~/.config/wezterm/wezterm.lua
 ln -sf <path_to_dotfiles>/home/.config/starship.toml ~/.config/starship.toml
-
-mkdir -p ~/.config/herdr
 ln -sf <path_to_dotfiles>/home/.config/herdr/config.toml ~/.config/herdr/config.toml
 
 # .claude directory (create parent dir first, individual files only)
@@ -130,7 +130,7 @@ Custom keymaps in `home/.config/nvim/lua/config/keymaps.lua`. LazyVim default ke
 Prefix: `Ctrl+Space` (not default Ctrl+b)
 
 Key patterns:
-- `prefix + r` - Reload config from ~/.tmux.conf
+- `prefix + r` - Reload config from ~/.config/tmux/tmux.conf
 - `v` - Vertical split (preserves current path)
 - `s` - Horizontal split (preserves current path)
 - Vim-style copy mode bindings (v/V/y)
@@ -203,7 +203,8 @@ When switching themes system-wide:
 
 This is a dotfiles repository. No compilation, linting, or test commands. Changes typically applied by:
 - Neovim: Auto-reloads on config save (hotreload.lua)
-- Tmux: `prefix + r` to source ~/.tmux.conf
+- Tmux: `prefix + r` to source ~/.config/tmux/tmux.conf
 - Herdr: `herdr server reload-config` or `prefix + shift+r`
 - Shell: `source ~/.zshrc` or restart terminal
 - Ghostty: Automatically reloads config
+- WezTerm: Automatically reloads config
