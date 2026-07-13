@@ -23,7 +23,7 @@ source /opt/homebrew/share/zsh-syntax-highlighting/zsh-syntax-highlighting.zsh
 eval "$(starship init zsh)"
 eval "$(direnv hook zsh)"
 
-# Auto-start tmux (only if not already in tmux)
-if [ -z "$TMUX" ] && command -v tmux &> /dev/null; then
-    tmux attach -t default || tmux new -s default
+# Auto-start herdr (only if not already in herdr)
+if [ -z "$HERDR" ] && command -v herdr &> /dev/null; then
+    herdr
 fi
