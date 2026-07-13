@@ -30,20 +30,21 @@ When modifying theme/colors in any tool, maintain VSCode Dark+ color values to p
 │   ├── lua/
 │   │   ├── config/         # Core LazyVim configs (autocmds, keymaps, options, lazy)
 │   │   └── plugins/        # Plugin customizations
+├── home/                    # Files symlinked to ~ (organized by target location)
+│   └── .claude/            # Claude Code settings and hooks (individual files symlinked to ~/.claude/)
+│       ├── hooks/          # Event hooks (caveman mode, prompt submit)
+│       ├── settings.json   # Claude Code settings
+│       ├── settings.local.json # Local overrides
+│       ├── statusline-command.sh # Custom statusline script
+│       └── CLAUDE.md       # Global agent instructions
 ├── .tmux.conf              # Tmux config with vim-tmux-navigator integration
 ├── ghostty/
 │   ├── config              # Ghostty terminal config
 │   └── shaders/            # Custom GLSL shaders
 ├── herdr/
-│   └── config.toml         # Herdr agent multiplexer config (symlinked to ~/.config/herdr/)
+│   └── config.toml         # Herdr agent multiplexer config
 ├── .zshrc                  # Shell config (loads nvm, bun, starship)
 ├── starship.toml           # Starship prompt config with custom palettes
-├── .claude/                # Claude Code settings and hooks (symlinked to ~/.claude/)
-│   ├── hooks/              # Event hooks (caveman mode, prompt submit)
-│   ├── settings.json       # Claude Code settings
-│   ├── settings.local.json # Local overrides
-│   ├── statusline-command.sh # Custom statusline script
-│   └── CLAUDE.md           # Global agent instructions (symlinked to ~/.claude/CLAUDE.md)
 └── CLAUDE.md               # Project-specific agent instructions for this repo
 ```
 
@@ -53,19 +54,58 @@ Agent instructions managed via two CLAUDE.md files:
 
 **CLAUDE.md** (this file at repo root): Project-specific instructions for dotfiles repository. Takes precedence when working in this repo.
 
-**.claude/CLAUDE.md**: Global agent instructions applied across all projects. Contains quality standards, commit message preferences, bug fix workflows, UI/engineering excellence rules. Symlinked to `~/.claude/CLAUDE.md` for global availability.
+**home/.claude/CLAUDE.md**: Global agent instructions applied across all projects. Contains quality standards, commit message preferences, bug fix workflows, UI/engineering excellence rules. Symlinked to `~/.claude/CLAUDE.md` for global availability.
 
 Claude Code resolution order:
 1. Project-local ./CLAUDE.md (this file)
-2. Global ~/.claude/CLAUDE.md (symlinked to ./.claude/CLAUDE.md)
+2. Global ~/.claude/CLAUDE.md (symlinked to home/.claude/CLAUDE.md)
 
-Other Claude Code configs symlinked from `.claude/` to `~/.claude/`:
+Individual Claude Code config files symlinked from `home/.claude/` to `~/.claude/`:
+- CLAUDE.md - Global agent instructions
 - hooks/ - Event-driven shell commands (caveman mode, prompt validation)
 - settings.json - Editor behavior, model preferences, feature flags
 - settings.local.json - Machine-specific overrides
 - statusline-command.sh - Custom terminal statusline
 
-All symlinks already configured. No manual setup needed.
+**Why individual files instead of entire directory?** ~/.claude/ contains runtime state managed by Claude Code (history.jsonl, debug/, session-env/, file-history/, cache/). Symlinking entire directory would write runtime state into version-controlled repo. Individual file symlinks keep configs in repo while runtime state stays local.
+
+## Setup Instructions
+
+Fresh Mac setup after cloning this repo:
+
+```bash
+# Replace <path_to_dotfiles> with actual repo path (e.g., ~/Documents/Personal/dotfiles)
+
+# Home directory dotfiles
+ln -sf <path_to_dotfiles>/.bashrc ~/.bashrc
+ln -sf <path_to_dotfiles>/.tmux.conf ~/.tmux.conf
+ln -sf <path_to_dotfiles>/.wezterm.lua ~/.wezterm.lua
+ln -sf <path_to_dotfiles>/.zshrc ~/.zshrc
+
+# .config directory (create parent dirs first)
+mkdir -p ~/.config
+ln -sf <path_to_dotfiles>/nvim ~/.config/nvim
+ln -sf <path_to_dotfiles>/ghostty ~/.config/ghostty
+ln -sf <path_to_dotfiles>/starship.toml ~/.config/starship.toml
+
+mkdir -p ~/.config/herdr
+ln -sf <path_to_dotfiles>/herdr/config.toml ~/.config/herdr/config.toml
+
+# .claude directory (create parent dir first, individual files only)
+mkdir -p ~/.claude
+ln -sf <path_to_dotfiles>/home/.claude/CLAUDE.md ~/.claude/CLAUDE.md
+ln -sf <path_to_dotfiles>/home/.claude/hooks ~/.claude/hooks
+ln -sf <path_to_dotfiles>/home/.claude/settings.json ~/.claude/settings.json
+ln -sf <path_to_dotfiles>/home/.claude/settings.local.json ~/.claude/settings.local.json
+ln -sf <path_to_dotfiles>/home/.claude/statusline-command.sh ~/.claude/statusline-command.sh
+```
+
+Verify symlinks:
+```bash
+ls -la ~ | grep "^l"
+ls -la ~/.config | grep "^l"
+ls -la ~/.claude | grep "^l"
+```
 
 ## Development Workflows
 
