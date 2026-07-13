@@ -157,16 +157,21 @@ Zsh with:
 
 Agent multiplexer config at `home/.config/herdr/config.toml` (symlinked to `~/.config/herdr/config.toml`).
 
-Default prefix: `Ctrl+b`
+Prefix: `Ctrl+Space` (matches tmux)
 
-Key patterns:
+Key patterns (tmux-style):
 - `prefix + ?` - Help menu
-- `prefix + s` - Settings
+- `prefix + shift+s` - Settings (moved to make room for splits)
 - `prefix + c` - New tab
-- `prefix + v` - Vertical split
-- `prefix + -` - Horizontal split
+- `prefix + v` - Vertical split (matches tmux)
+- `prefix + s` - Horizontal split (matches tmux)
 - `prefix + h/j/k/l` - Focus pane left/down/up/right
+- `prefix + w` - Workspace picker
+- `prefix + g` - Goto
 - `prefix + shift+r` - Reload config
+
+UI settings:
+- `agent_panel_sort = "spaces"` - Group agents by workspace
 
 Reload config without restart:
 ```bash
