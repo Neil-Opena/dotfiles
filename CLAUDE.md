@@ -25,26 +25,30 @@ When modifying theme/colors in any tool, maintain VSCode Dark+ color values to p
 
 ```
 .
-├── nvim/                    # Neovim LazyVim configuration
-│   ├── init.lua            # Entry point
-│   ├── lua/
-│   │   ├── config/         # Core LazyVim configs (autocmds, keymaps, options, lazy)
-│   │   └── plugins/        # Plugin customizations
-├── home/                    # Files symlinked to ~ (organized by target location)
-│   └── .claude/            # Claude Code settings and hooks (individual files symlinked to ~/.claude/)
-│       ├── hooks/          # Event hooks (caveman mode, prompt submit)
-│       ├── settings.json   # Claude Code settings
-│       ├── settings.local.json # Local overrides
-│       ├── statusline-command.sh # Custom statusline script
-│       └── CLAUDE.md       # Global agent instructions
-├── .tmux.conf              # Tmux config with vim-tmux-navigator integration
-├── ghostty/
-│   ├── config              # Ghostty terminal config
-│   └── shaders/            # Custom GLSL shaders
-├── herdr/
-│   └── config.toml         # Herdr agent multiplexer config
-├── .zshrc                  # Shell config (loads nvm, bun, starship)
-├── starship.toml           # Starship prompt config with custom palettes
+├── home/                    # Mirrors ~ home directory structure
+│   ├── .bashrc             # Bash shell config
+│   ├── .tmux.conf          # Tmux config with vim-tmux-navigator integration
+│   ├── .wezterm.lua        # WezTerm terminal config
+│   ├── .zshrc              # Zsh shell config (loads nvm, bun, starship)
+│   ├── .claude/            # Claude Code settings and hooks (individual files symlinked to ~/.claude/)
+│   │   ├── hooks/          # Event hooks (caveman mode, prompt submit)
+│   │   ├── settings.json   # Claude Code settings
+│   │   ├── settings.local.json # Local overrides
+│   │   ├── statusline-command.sh # Custom statusline script
+│   │   └── CLAUDE.md       # Global agent instructions
+│   └── .config/            # Mirrors ~/.config structure
+│       ├── nvim/           # Neovim LazyVim configuration
+│       │   ├── init.lua    # Entry point
+│       │   └── lua/
+│       │       ├── config/ # Core LazyVim configs (autocmds, keymaps, options, lazy)
+│       │       └── plugins/ # Plugin customizations
+│       ├── ghostty/
+│       │   ├── config      # Ghostty terminal config
+│       │   └── shaders/    # Custom GLSL shaders
+│       ├── herdr/
+│       │   └── config.toml # Herdr agent multiplexer config
+│       └── starship.toml   # Starship prompt config with custom palettes
+├── nvim.backup/            # Backup of previous nvim config
 └── CLAUDE.md               # Project-specific agent instructions for this repo
 ```
 
@@ -77,19 +81,19 @@ Fresh Mac setup after cloning this repo:
 # Replace <path_to_dotfiles> with actual repo path (e.g., ~/Documents/Personal/dotfiles)
 
 # Home directory dotfiles
-ln -sf <path_to_dotfiles>/.bashrc ~/.bashrc
-ln -sf <path_to_dotfiles>/.tmux.conf ~/.tmux.conf
-ln -sf <path_to_dotfiles>/.wezterm.lua ~/.wezterm.lua
-ln -sf <path_to_dotfiles>/.zshrc ~/.zshrc
+ln -sf <path_to_dotfiles>/home/.bashrc ~/.bashrc
+ln -sf <path_to_dotfiles>/home/.tmux.conf ~/.tmux.conf
+ln -sf <path_to_dotfiles>/home/.wezterm.lua ~/.wezterm.lua
+ln -sf <path_to_dotfiles>/home/.zshrc ~/.zshrc
 
 # .config directory (create parent dirs first)
 mkdir -p ~/.config
-ln -sf <path_to_dotfiles>/nvim ~/.config/nvim
-ln -sf <path_to_dotfiles>/ghostty ~/.config/ghostty
-ln -sf <path_to_dotfiles>/starship.toml ~/.config/starship.toml
+ln -sf <path_to_dotfiles>/home/.config/nvim ~/.config/nvim
+ln -sf <path_to_dotfiles>/home/.config/ghostty ~/.config/ghostty
+ln -sf <path_to_dotfiles>/home/.config/starship.toml ~/.config/starship.toml
 
 mkdir -p ~/.config/herdr
-ln -sf <path_to_dotfiles>/herdr/config.toml ~/.config/herdr/config.toml
+ln -sf <path_to_dotfiles>/home/.config/herdr/config.toml ~/.config/herdr/config.toml
 
 # .claude directory (create parent dir first, individual files only)
 mkdir -p ~/.claude
@@ -111,7 +115,7 @@ ls -la ~/.claude | grep "^l"
 
 ### Neovim Configuration
 
-LazyVim-based setup. Plugin configs live in `nvim/lua/plugins/`:
+LazyVim-based setup. Plugin configs live in `home/.config/nvim/lua/plugins/`:
 - `colorscheme.lua` - Theme selection (vscode, kanagawa available)
 - `explorer.lua` - File explorer settings
 - `lsp.lua` - LSP configurations
@@ -119,7 +123,7 @@ LazyVim-based setup. Plugin configs live in `nvim/lua/plugins/`:
 - `hotreload.lua` - Auto-reload nvim on config changes
 - `image.lua` - Image rendering in terminal
 
-Custom keymaps in `nvim/lua/config/keymaps.lua`. LazyVim default keymaps: https://github.com/LazyVim/LazyVim/blob/main/lua/lazyvim/config/keymaps.lua
+Custom keymaps in `home/.config/nvim/lua/config/keymaps.lua`. LazyVim default keymaps: https://github.com/LazyVim/LazyVim/blob/main/lua/lazyvim/config/keymaps.lua
 
 ### Tmux Configuration
 
@@ -151,7 +155,7 @@ Zsh with:
 
 ### Herdr Configuration
 
-Agent multiplexer config at `herdr/config.toml` (symlinked to `~/.config/herdr/config.toml`).
+Agent multiplexer config at `home/.config/herdr/config.toml` (symlinked to `~/.config/herdr/config.toml`).
 
 Default prefix: `Ctrl+b`
 
@@ -173,23 +177,23 @@ Default config generated via `herdr --default-config`.
 
 ### Theme Development
 
-Multiple theme palettes defined in starship.toml:
+Multiple theme palettes defined in home/.config/starship.toml:
 - `vscode_dark_plus` (active)
 - `catppuccin_mocha`
 - `kanagawa`
 - `gruvbox_dark`
 
 When switching themes system-wide:
-1. Update Neovim colorscheme in `nvim/lua/plugins/colorscheme.lua`
-2. Update tmux pane border colors in `.tmux.conf`
-3. Update Ghostty palette in `ghostty/config`
-4. Update starship palette in `starship.toml` (line 29: `palette = '...'`)
+1. Update Neovim colorscheme in `home/.config/nvim/lua/plugins/colorscheme.lua`
+2. Update tmux pane border colors in `home/.tmux.conf`
+3. Update Ghostty palette in `home/.config/ghostty/config`
+4. Update starship palette in `home/.config/starship.toml` (line 29: `palette = '...'`)
 
 ## Key Integration Points
 
 **Vim-Tmux Navigation**: Seamless pane switching between Neovim and Tmux using `Ctrl+h/j/k/l`. Both tools configured for this integration:
 - Tmux: Uses christoomey/vim-tmux-navigator plugin
-- Neovim: Plugin config in `nvim/lua/plugins/vim-tmux-navigator.lua`
+- Neovim: Plugin config in `home/.config/nvim/lua/plugins/vim-tmux-navigator.lua`
 
 **Extended Keys**: Tmux and Ghostty both configured for extended keys (CSI-u format) to support modern terminal capabilities and better modifier key handling.
 
