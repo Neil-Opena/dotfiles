@@ -23,6 +23,15 @@ source /opt/homebrew/share/zsh-syntax-highlighting/zsh-syntax-highlighting.zsh
 eval "$(starship init zsh)"
 eval "$(direnv hook zsh)"
 
+# Shell aliases
+alias ..="cd .."
+alias add="git add ."
+alias push="git push"
+alias pull="git pull"
+alias m="git switch main"
+alias cc="claude --dangerously-skip-permissions"
+alias co="codex --full-auto"
+
 # Auto-start herdr (only if not already in herdr)
 if command -v herdr &> /dev/null; then
     # Check parent process - if it's herdr, we're already inside
