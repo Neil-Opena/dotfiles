@@ -14,11 +14,30 @@ export PATH="$BUN_INSTALL/bin:$PATH"
 # ghostty
 export PATH="/Applications/Ghostty.app/Contents/MacOS:$PATH"
 
-# Catppuccin theme for zsh-syntax-highlighting (must be before loading the plugin)
-source ~/.zsh/catppuccin_macchiato-zsh-syntax-highlighting.zsh
+# zsh-syntax-highlighting
+if [ ! -f /opt/homebrew/share/zsh-syntax-highlighting/zsh-syntax-highlighting.zsh ]; then
+  if command -v brew &> /dev/null; then
+    echo "Installing zsh-syntax-highlighting..."
+    brew install zsh-syntax-highlighting
+  fi
+fi
 
-# zsh-syntax-highlighting (must be at end of .zshrc)
-source /opt/homebrew/share/zsh-syntax-highlighting/zsh-syntax-highlighting.zsh
+if [ -f /opt/homebrew/share/zsh-syntax-highlighting/zsh-syntax-highlighting.zsh ]; then
+  source /opt/homebrew/share/zsh-syntax-highlighting/zsh-syntax-highlighting.zsh
+fi
+
+# zsh-autosuggestions
+if [ ! -f /opt/homebrew/share/zsh-autosuggestions/zsh-autosuggestions.zsh ]; then
+  if command -v brew &> /dev/null; then
+    echo "Installing zsh-autosuggestions..."
+    brew install zsh-autosuggestions
+  fi
+fi
+
+if [ -f /opt/homebrew/share/zsh-autosuggestions/zsh-autosuggestions.zsh ]; then
+  source /opt/homebrew/share/zsh-autosuggestions/zsh-autosuggestions.zsh
+  bindkey '^f' autosuggest-accept  # Ctrl+f accepts suggestion
+fi
 
 eval "$(starship init zsh)"
 eval "$(direnv hook zsh)"
