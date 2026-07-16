@@ -4,12 +4,14 @@ This file provides guidance to Claude Code (claude.ai/code) when working with co
 
 ## Repository Overview
 
-Personal dotfiles repository for macOS development environment. Manages configs for:
-- **Neovim** (two configs: `nvim` for LazyVim full-featured setup, `nvim_simple` for lean minimal config)
-- **Tmux** (multiplexer with vim-style navigation)
-- **Ghostty** (terminal emulator)
-- **Herdr** (agent multiplexer)
-- **Shell** (Zsh with Starship prompt)
+Dotfiles repository managing macOS development environment configs. When modifying files:
+- **Neovim** - Two configs: `nvim` (LazyVim full) and `nvim_simple` (minimal). Plugin configs in `lua/plugins/`
+- **Tmux** - Multiplexer config at `home/.config/tmux/tmux.conf`. Prefix `Ctrl+Space`
+- **Ghostty** - Terminal config at `home/.config/ghostty/config`
+- **Herdr** - Agent multiplexer at `home/.config/herdr/config.toml`
+- **Shell** - Zsh config at `home/.zshrc`, Starship prompt at `home/.config/starship.toml`
+
+User setup instructions in README.md. Agent-specific guidance below.
 
 ## Theme Consistency
 
@@ -58,7 +60,8 @@ When modifying theme/colors in any tool, maintain VSCode Dark+ color values to p
 │       ├── herdr/
 │       │   └── config.toml # Herdr agent multiplexer config
 │       └── starship.toml   # Starship prompt config with custom palettes
-└── CLAUDE.md               # Project-specific agent instructions for this repo
+├── CLAUDE.md               # Project-specific agent instructions for this repo
+└── README.md               # User-facing setup and usage docs
 ```
 
 ## Claude Code Configuration
@@ -112,49 +115,6 @@ Notification hooks (permission prompts, idle state, task completion) removed sin
   }]
 }
 
-## Setup Instructions
-
-Fresh Mac setup after cloning this repo:
-
-```bash
-# Replace <path_to_dotfiles> with actual repo path (e.g., ~/Documents/Personal/dotfiles)
-
-# Home directory dotfiles
-ln -sf <path_to_dotfiles>/home/.bashrc ~/.bashrc
-ln -sf <path_to_dotfiles>/home/.zshrc ~/.zshrc
-
-# .config directory (create parent dirs first)
-mkdir -p ~/.config/tmux ~/.config/wezterm ~/.config/herdr
-
-# Neovim config (choose one)
-# Option 1: Full-featured LazyVim setup
-ln -sf <path_to_dotfiles>/home/.config/nvim ~/.config/nvim
-
-# Option 2: Lean minimal config
-# ln -sf <path_to_dotfiles>/home/.config/nvim_simple ~/.config/nvim
-
-# Other configs
-ln -sf <path_to_dotfiles>/home/.config/ghostty ~/.config/ghostty
-ln -sf <path_to_dotfiles>/home/.config/tmux/tmux.conf ~/.config/tmux/tmux.conf
-ln -sf <path_to_dotfiles>/home/.config/wezterm/wezterm.lua ~/.config/wezterm/wezterm.lua
-ln -sf <path_to_dotfiles>/home/.config/starship.toml ~/.config/starship.toml
-ln -sf <path_to_dotfiles>/home/.config/herdr/config.toml ~/.config/herdr/config.toml
-
-# .claude directory (create parent dir first, individual files only)
-mkdir -p ~/.claude
-ln -sf <path_to_dotfiles>/home/.claude/CLAUDE.md ~/.claude/CLAUDE.md
-ln -sf <path_to_dotfiles>/home/.claude/hooks ~/.claude/hooks
-ln -sf <path_to_dotfiles>/home/.claude/settings.json ~/.claude/settings.json
-ln -sf <path_to_dotfiles>/home/.claude/settings.local.json ~/.claude/settings.local.json
-ln -sf <path_to_dotfiles>/home/.claude/statusline-command.sh ~/.claude/statusline-command.sh
-```
-
-Verify symlinks:
-```bash
-ls -la ~ | grep "^l"
-ls -la ~/.config | grep "^l"
-ls -la ~/.claude | grep "^l"
-```
 
 ## Development Workflows
 
