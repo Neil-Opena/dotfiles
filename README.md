@@ -222,6 +222,56 @@ curl -s https://raw.githubusercontent.com/JohnMorales/dotfiles/master/colors/24-
 └── README.md             # This file
 ```
 
+## Working with Claude Code
+
+### Project Memory (CLAUDE.md)
+
+Every project should have project-level `CLAUDE.md` file at repo root. This file contains collective learnings from all agent sessions.
+
+**What belongs in project CLAUDE.md:**
+- Project overview and purpose
+- Repository structure and file organization
+- Domain terminology and concepts
+- How critical components work
+- End-to-end testing workflows
+- Project conventions (naming, patterns, architecture decisions)
+- Common pitfalls and mistakes to avoid
+
+**Make it verbose.** Unlike global CLAUDE.md (short quality rules), project memory should be detailed. Every time agent does something wrong:
+1. Correct the behavior
+2. Ask agent to update CLAUDE.md with the learning
+3. Future sessions won't repeat the mistake
+
+**Example workflow:**
+```
+You: "Don't use `any` types in TypeScript. Update CLAUDE.md to remember this."
+Agent: *Updates project CLAUDE.md with TypeScript conventions section*
+```
+
+### Token Optimization with Skills
+
+As project CLAUDE.md grows, extract conditional information into project-level skills.
+
+**Conditional information** = only needed in specific contexts:
+- E2E testing steps (only when making changes, not answering questions)
+- Deployment workflows (only when shipping)
+- Database migration process (only when touching schema)
+
+**Keep in CLAUDE.md** = always relevant:
+- Project structure
+- Core architecture patterns
+- Critical gotchas
+
+**Extraction workflow:**
+```
+You: "CLAUDE.md is 500 lines. Let's extract the end-to-end testing instructions into a project-level skill."
+Agent: *Creates skill at .claude/skills/e2e-testing/, moves instructions, updates CLAUDE.md*
+```
+
+Agent only loads skill when needed, saving tokens on every other request.
+
+See: https://github.com/anthropics/claude-code for skills documentation.
+
 ## License
 
 Personal dotfiles. Use at your own risk.
