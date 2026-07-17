@@ -272,6 +272,20 @@ Agent only loads skill when needed, saving tokens on every other request.
 
 See: https://github.com/anthropics/claude-code for skills documentation.
 
+## Related Tools
+
+Claude Code ecosystem tools for enhanced agent workflows:
+
+- **[lavish-axi](https://github.com/kunchenguid/lavish-axi)** - CLI for creating rich, reviewable HTML artifacts from agent responses. Annotate elements, edit Mermaid diagrams interactively, send visual feedback without screenshots.
+
+- **[no-mistakes](https://github.com/kunchenguid/no-mistakes)** - Git validation proxy that intercepts pushes, runs AI-powered checks in isolated worktree, auto-fixes mechanical issues, escalates judgment calls. Only forwards to remote after all checks pass.
+
+- **[gnhf](https://github.com/kunchenguid/gnhf)** - Overnight agent orchestrator for autonomous code improvements. Each iteration makes one small committed change. Wake up to completed branch with full work log.
+
+- **[treehouse](https://github.com/kunchenguid/treehouse)** - Manages pool of reusable git worktrees for efficient multi-task workflows. Instant isolation, preserved dependencies, conflict-free operations. Ideal for AI agent workflows.
+
+- **[firstmate](https://github.com/kunchenguid/firstmate)** - Agent crew orchestration system. Single first mate agent spawns autonomous crewmates working in parallel worktrees. Coordinate multiple simultaneous tasks through one interface.
+
 ## License
 
 Personal dotfiles. Use at your own risk.
