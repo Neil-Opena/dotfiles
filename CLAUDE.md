@@ -31,12 +31,12 @@ When modifying theme/colors in any tool, maintain VSCode Dark+ color values to p
 ├── home/                    # Mirrors ~ home directory structure
 │   ├── .bashrc             # Bash shell config
 │   ├── .zshrc              # Zsh shell config (loads nvm, bun, starship)
+│   ├── AGENTS.md           # Global agent instructions (agent-agnostic)
 │   ├── .claude/            # Claude Code settings and hooks (individual files symlinked to ~/.claude/)
 │   │   ├── hooks/          # Event hooks (caveman mode, prompt submit)
 │   │   ├── settings.json   # Claude Code settings
 │   │   ├── settings.local.json # Local overrides
-│   │   ├── statusline-command.sh # Custom statusline script
-│   │   └── CLAUDE.md       # Global agent instructions
+│   │   └── statusline-command.sh # Custom statusline script
 │   └── .config/            # Mirrors ~/.config structure
 │       ├── nvim/           # Neovim LazyVim configuration (full-featured)
 │       │   ├── init.lua    # Entry point
@@ -64,20 +64,24 @@ When modifying theme/colors in any tool, maintain VSCode Dark+ color values to p
 └── README.md               # User-facing setup and usage docs
 ```
 
-## Claude Code Configuration
+## Agent Configuration
 
-Agent instructions managed via two CLAUDE.md files:
+Agent instructions managed via two files:
 
 **CLAUDE.md** (this file at repo root): Project-specific instructions for dotfiles repository. Takes precedence when working in this repo.
 
-**home/.claude/CLAUDE.md**: Global agent instructions applied across all projects. Contains quality standards, commit message preferences, bug fix workflows, UI/engineering excellence rules. Symlinked to `~/.claude/CLAUDE.md` for global availability.
+**home/AGENTS.md**: Global agent instructions applied across all projects. Contains quality standards, commit message preferences, bug fix workflows, UI/engineering excellence rules. Agent-agnostic naming allows use with any AI coding assistant.
+
+For Claude Code specifically, symlink `~/.claude/CLAUDE.md` to `~/AGENTS.md`:
+```bash
+ln -sf ~/AGENTS.md ~/.claude/CLAUDE.md
+```
 
 Claude Code resolution order:
 1. Project-local ./CLAUDE.md (this file)
-2. Global ~/.claude/CLAUDE.md (symlinked to home/.claude/CLAUDE.md)
+2. Global ~/.claude/CLAUDE.md (symlink to ~/AGENTS.md)
 
 Individual Claude Code config files symlinked from `home/.claude/` to `~/.claude/`:
-- CLAUDE.md - Global agent instructions
 - hooks/ - Event-driven shell commands (caveman mode, prompt validation)
 - settings.json - Editor behavior, model preferences, feature flags
 - settings.local.json - Machine-specific overrides
