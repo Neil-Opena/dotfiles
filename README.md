@@ -286,6 +286,8 @@ Claude Code ecosystem tools for enhanced agent workflows:
 
 - **[firstmate](https://github.com/kunchenguid/firstmate)** - Agent crew orchestration system. Single first mate agent spawns autonomous crewmates working in parallel worktrees. Coordinate multiple simultaneous tasks through one interface.
 
+- **[OpenSuperWhisper](https://github.com/starmel/OpenSuperWhisper)** - Open source voice-to-text transcription tool.
+
 ## License
 
 Personal dotfiles. Use at your own risk.
