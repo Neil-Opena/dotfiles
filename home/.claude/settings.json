@@ -40,6 +40,16 @@
             "statusMessage": "Loading caveman mode..."
           }
         ]
+      },
+      {
+        "matcher": "*",
+        "hooks": [
+          {
+            "type": "command",
+            "command": "bash '/Users/neilopena/.claude/hooks/herdr-agent-state.sh' session",
+            "timeout": 10
+          }
+        ]
       }
     ],
     "UserPromptSubmit": [
@@ -60,10 +70,10 @@
     "command": "/bin/bash ~/.claude/statusline-command.sh"
   },
   "enabledPlugins": {
-    "expo@expo-plugins": true,
+    "caveman@caveman": true,
     "document-skills@anthropic-agent-skills": false,
+    "expo@expo-plugins": true,
     "figma@claude-plugins-official": false,
-    "warp@claude-code-warp": true,
-    "caveman@caveman": true
+    "warp@claude-code-warp": true
   }
 }
