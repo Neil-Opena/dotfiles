@@ -75,5 +75,7 @@
     "expo@expo-plugins": true,
     "figma@claude-plugins-official": false,
     "warp@claude-code-warp": true
-  }
+  },
+  "skipDangerousModePermissionPrompt": true,
+  "tui": "fullscreen"
 }
